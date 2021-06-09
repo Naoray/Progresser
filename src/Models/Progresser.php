@@ -16,7 +16,7 @@ class Progresser extends Model
     /**
      * Mass assignable attributes.
      *
-     * @var string[] 
+     * @var string[]
      */
     protected $fillable = [
         'status',
@@ -109,7 +109,7 @@ class Progresser extends Model
      */
     public function hasCompleted(): bool
     {
-        return !$this->isRunning() && !$this->hasFailed();
+        return ! $this->isRunning() && ! $this->hasFailed();
     }
 
     /**
@@ -140,7 +140,7 @@ class Progresser extends Model
      * @param string|null $default_completed_status
      * @return static
      */
-    public function defaultCompleteStatus(string|null $default_completed_status = null): static
+    public function defaultCompleteStatus(string | null $default_completed_status = null): static
     {
         $this->update([
             'default_completed_status' => $default_completed_status,
@@ -155,7 +155,7 @@ class Progresser extends Model
      * @param string|null $default_failed_status
      * @return static
      */
-    public function defaultFailedStatus(string|null $default_failed_status = null): static
+    public function defaultFailedStatus(string | null $default_failed_status = null): static
     {
         $this->update([
             'default_failed_status' => $default_failed_status,
@@ -171,7 +171,7 @@ class Progresser extends Model
      * @param string|null $failed_status
      * @return bool
      */
-    public function defaultStatuses(string|null $completed_status = null, string|null $failed_status = null): bool
+    public function defaultStatuses(string | null $completed_status = null, string | null $failed_status = null): bool
     {
         return $this->update([
             'default_completed_status' => $completed_status,
@@ -187,7 +187,7 @@ class Progresser extends Model
      * @param int $start_at
      * @return bool
      */
-    public function start(string $message, int|null $steps = null, int $start_at = 0): bool
+    public function start(string $message, int | null $steps = null, int $start_at = 0): bool
     {
         if (
             $this->isRunning() ||
@@ -216,7 +216,7 @@ class Progresser extends Model
      */
     public function status(string $message): bool
     {
-        if (!$this->isRunning()) {
+        if (! $this->isRunning()) {
             return false;
         }
 
@@ -231,9 +231,9 @@ class Progresser extends Model
      * @param string|null $message
      * @return bool
      */
-    public function step(string|null $message = null): bool
+    public function step(string | null $message = null): bool
     {
-        if (!$this->isRunning()) {
+        if (! $this->isRunning()) {
             return false;
         }
 
@@ -260,10 +260,10 @@ class Progresser extends Model
      * @return bool
      */
     public function fail(
-        string|null $message = null,
-        JsonSerializable|string|int|float|bool|null $payload = null
+        string | null $message = null,
+        JsonSerializable | string | int | float | bool | null $payload = null
     ): bool {
-        if (!$this->isRunning()) {
+        if (! $this->isRunning()) {
             return false;
         }
 
@@ -273,7 +273,7 @@ class Progresser extends Model
             'failed' => true,
             'failed_payload' => ($payload === null)
                 ? null
-                : json_encode($payload)
+                : json_encode($payload),
         ]);
     }
 
@@ -288,9 +288,9 @@ class Progresser extends Model
      * @param string|null $message
      * @return bool
      */
-    public function complete(string|null $message = null): bool
+    public function complete(string | null $message = null): bool
     {
-        if (!$this->isRunning()) {
+        if (! $this->isRunning()) {
             return false;
         }
 

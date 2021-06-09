@@ -16,7 +16,7 @@ class ProgresserServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/progresser.php',
+            __DIR__.'/../config/progresser.php',
             'progresser'
         );
     }
@@ -28,10 +28,10 @@ class ProgresserServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->publishes([
-            __DIR__ . '/../config/progresser.php' => config_path('progresser.php'),
+            __DIR__.'/../config/progresser.php' => config_path('progresser.php'),
         ]);
     }
 }
